@@ -37,18 +37,18 @@ module Choices
   end
   
   def add_sub
-    rand(1..2)
+    rand(ADD..SUB)
   end
   
   def add_sub_mul
-    rand(1..3)
+    rand(ADD..MUL)
   end
   
   def add_sub_mul_int
-    rand (1..4)
+    rand (ADD..INT_DIV)
   end
   
   def all_operators
-    rand(1..6)
+    rand(ADD..DIV)
   end
 end

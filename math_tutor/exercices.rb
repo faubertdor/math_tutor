@@ -1,7 +1,7 @@
 # This class manage the exercices 
 # exercices, subjects, scores
 # Jean F. Dorancy
-# 12/03/2015
+# 12/04/2015
 
 class Exercices
     attr_reader :nb_of_questions
@@ -50,10 +50,12 @@ class Exercices
           operator = add_sub_mul
         when A_S_M_I
           operator = add_sub_mul_int
+        when ALL
+          operator = all_operators
         end
         
-        puts "\nQuestion # #{counter += 1}"
-        puts "------------"
+        puts "\nQuestion # #{counter += 1}/#{nb_of_questions}"
+        puts "-----------------"
         
         case single_question.solve(operator)
         when CREDIT
@@ -70,6 +72,10 @@ class Exercices
     end
     
     def scores
+      percent = (total_score / (nb_of_questions * CREDIT).to_f) * 100
+      percent *= 1000
+      percent = percent.to_i / 10
+      percent /= 100.0
       puts "Score Report Card\n"\
            "-----------------\n\n"
       puts "Total number of question" + (nb_of_questions > 1? "s:":":") + " #{nb_of_questions}\n"\
@@ -77,7 +83,7 @@ class Exercices
            "Incorrect answer" + (nb_incorrect> 1? "s:":":") + " #{nb_incorrect}\n"\
            "Partially correct answer" + (partially_correct > 1? "s:":":") + " #{partially_correct}\n"\
            "Total score: #{total_score}\n"\
-           "Your percentage is: #{(total_score / (nb_of_questions * CREDIT).to_f) * 100}%\n\n"
+           "Your percentage is: #{percent}%\n\n"
       clear_scr
     end
 end

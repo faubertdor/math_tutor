@@ -1,7 +1,7 @@
 # This class manage each question
 # question, answer, grade
 # Jean F. Dorancy
-# 12/03/2015
+# 12/04/2015
 
 class Question
   attr_accessor :operand1, :operand2, :answer, :score, :credit
@@ -51,7 +51,7 @@ class Question
       display(operator)
       user_input = gets.chomp
       if user_input.to_f == answer
-        puts "Good job this time!\n\n"
+        puts "\nGood job this time!\n\n"
         self.score = credit / 2
       else
         puts "\nSorry! The answer is #{self.answer}. Better luck next time :)\n\n"
