@@ -5,17 +5,18 @@
 
 class Exercices
     attr_reader :nb_of_questions
-    attr_accessor :subject, :nb_correct, :nb_incorrect, :partially_correct, :total_score
+    attr_accessor :subject, :nb_correct, :nb_incorrect, :partially_correct, :total_score, :all_questions
     CREDIT = 100
     
     include Choices
     
-    def initialize(choice)
-      self.subject = choice
+    def initialize(subject)
+      self.subject = subject
       self.nb_correct = 0
       self.nb_incorrect = 0
       self.partially_correct = 0
       self.total_score = 0
+      self.all_questions = []
     end
     
     def clear_scr
@@ -32,17 +33,19 @@ class Exercices
       end
     end
     
-    def questions(single_question)
+    def add_questions(nb_of_questions)
       counter = 0
-      single_question.credit = CREDIT
-      
+          
       if subject == RANDOM
         operator = add_sub_mul_int
       else
         operator = subject
       end
-
-      nb_of_questions.times do
+      
+      self.nb_of_questions = nb_of_questions
+      self.nb_of_questions.times do
+        single_question = Question.new
+        single_question.credit = CREDIT
         case subject
         when A_S
           operator = add_sub
@@ -54,7 +57,7 @@ class Exercices
           operator = all_operators
         end
         
-        puts "\nQuestion # #{counter += 1}/#{nb_of_questions}"
+        puts "\nQuestion # #{single_question.number = counter += 1}/#{nb_of_questions}"
         puts "-----------------"
         
         case single_question.solve(operator)
@@ -67,10 +70,30 @@ class Exercices
         when 0
           self.nb_incorrect += 1
         end
+        all_questions << single_question
         clear_scr
       end
     end
     
+    def review(number)
+      while number <= 0 || number > all_questions.length
+          print "Please enter a valid question #: "
+          number = gets.to_i
+      end
+      puts "\n\n"
+      all_questions[number - 1].review
+    end
+    
+    def review_all
+        length = all_questions.length
+        puts "Reviewing all #{length} question" + (length > 1? "s.": ".")
+        puts "-----------------------------------\n\n"
+        for question in all_questions do
+            question.review
+            puts "\n\n"
+        end
+    end
+
     def scores
       percent = (total_score / (nb_of_questions * CREDIT).to_f) * 100
       percent *= 1000

@@ -26,15 +26,20 @@ class Menu
          " 9: Addition, Substraction, Multiplication and Int Division \n"\
          "10: All operators                                           \n"\
          "11: A random single operator                                \n"\
-         "12: Exit the program                                        \n\n"\
+         "12: Review all the questions                                \n"\
+         "13: Exit the program                                        \n\n"\
   end
   
   def choice=(val)
       @choice = val
-     while choice <= 0 || choice > 12
+     while choice <= 0 || choice > 13
        print "Enter a choice between 1 and 12: "
        @choice = gets.to_i
      end
+  end
+  
+  def review
+    REVIEW
   end
   
   def exit

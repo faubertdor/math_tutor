@@ -10,17 +10,19 @@ load "question.rb"
 
 #main
 menu = Menu.new
-begin
+while true
   menu.print_header
   menu.print_choices
   print "Please enter your choice: "
   menu.choice = gets.to_i
-  if menu.choice != menu.exit
-    exo = Exercices.new(menu.choice)
-    print "Number of questions: "
-    exo.nb_of_questions = gets.to_i
-    exo.questions(Question.new)
-    exo.scores
+  
+  if menu.exit == menu.choice
+    exit
   end
-end while menu.choice != menu.exit
-puts "Bye bye!!!"
+  exo = Exercices.new(menu.choice)
+  print "Number of questions: "
+  nb_of_questions = gets.to_i
+  exo.add_questions(nb_of_questions)
+  exo.scores
+  exo.review_all
+end

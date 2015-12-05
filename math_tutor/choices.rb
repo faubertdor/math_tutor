@@ -1,7 +1,7 @@
 # This module is resposible for the constants used
 # operations constants
 # Jean F. Dorancy
-# 12/03/2015
+# 12/04/2015
 
 module Choices
   ADD = 1
@@ -15,7 +15,8 @@ module Choices
   A_S_M_I = 9
   ALL = 10
   RANDOM = 11
-  EXIT = 12
+  REVIEW = 12
+  EXIT = 13
   
   def operator_to_string(choice)
     case choice

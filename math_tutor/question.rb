@@ -4,25 +4,27 @@
 # 12/04/2015
 
 class Question
-  attr_accessor :operand1, :operand2, :answer, :score, :credit
+  attr_accessor :number, :operator, :operand1, :operand2, :answer, :score, :credit, :your_answers
   
   include Choices
   
-  def generate_operands
+  def initialize
     self.operand1 = rand(99)
     self.operand2 = rand(99)
+    self.your_answers = {}
   end
   
-  def display(operator)
-    puts "NOTE: Use two decimal places for Real Division" if operator == DIV
+  def display
+    #We print the note one time and don't want to print it during the review
+    puts "NOTE: Use two decimal places for Real Division\n\n" if self.operator == DIV && self.answer == nil
     puts (operand1 < 10? "    " : "   ") + operand1.to_s
-    puts operator_to_string(operator) + (operand2 < 10? "   " : "  ") + operand2.to_s
+    puts operator_to_string(self.operator) + (operand2 < 10? "   " : "  ") + operand2.to_s
     puts "------"
-    print "   "
+    print "   " if your_answers[:first] == nil || your_answers[:second] == nil
   end
   
-  def correct_answer(operator)
-    case operator
+  def correct_answer
+    case self.operator
     when ADD
         self.answer = operand1 + operand2
     when SUB
@@ -42,15 +44,16 @@ class Question
   end
   
   def solve(operator)
-    generate_operands
-    display(operator)
-    correct_answer(operator)
-    user_input = gets.chomp
-    if user_input.to_f != answer
+    self.operator = operator
+
+    display
+    correct_answer
+    self.your_answers[:first] = gets.chomp
+    if self.your_answers[:first].to_f != answer
       puts "\nSorry wrong answer! Try a second time.\n\n"
-      display(operator)
-      user_input = gets.chomp
-      if user_input.to_f == answer
+      display
+      self.your_answers[:second] = gets.chomp
+      if self.your_answers[:second].to_f == answer
         puts "\nGood job this time!\n\n"
         self.score = credit / 2
       else
@@ -61,5 +64,16 @@ class Question
       puts "\nWonderful!\n\n"
       self.score = credit
     end
-  end 
+  end
+  
+  def review
+      self.display
+      puts "Correct answer: #{answer}"
+      print "Your answer"
+      if answer == your_answers[:first]
+        print ": #{your_answers[:first]}"
+      else
+        print "s: #{your_answers[:first]}, #{your_answers[:second]}\n"
+      end
+  end
 end
