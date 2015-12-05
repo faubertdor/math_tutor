@@ -5,7 +5,7 @@
 
 class Question
   attr_accessor :number, :operator, :operand1, :operand2, :answer, :score, :credit, :your_answers
-  
+  SPACE = ""
   include Choices
   
   def initialize
@@ -20,7 +20,7 @@ class Question
     puts (operand1 < 10? "    " : "   ") + operand1.to_s
     puts constant_to_operator(self.operator) + (operand2 < 10? "   " : "  ") + operand2.to_s
     puts "------"
-    print "   " if your_answers[:first] == nil || your_answers[:second] == nil
+    print SPACE.rjust 3
   end
   
   def correct_answer
@@ -68,12 +68,12 @@ class Question
   
   def review
       print_question
-      puts "Correct answer: #{answer}"
+      puts "#{answer}"
       print "Your answer"
-      if answer == your_answers[:first]
-        print ": #{your_answers[:first]}"
+      if answer == your_answers[:first].to_f
+        print ": #{your_answers[:first]}."
       else
-        print "s: #{your_answers[:first]}, #{your_answers[:second]}\n"
+        print "s: #{your_answers[:first]}, #{your_answers[:second]}.\n"
       end
   end
 end

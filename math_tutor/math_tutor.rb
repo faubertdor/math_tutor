@@ -11,11 +11,11 @@ load "question.rb"
 
 #main
 menu = Menu.new
+menu.print_header
 exo_book = ExercicesBook.new
 counter = 0
 
 while true
-  menu.print_header
   menu.print_choices
   print "Please enter your choice: "
   menu.choice = gets.to_i
@@ -27,9 +27,20 @@ while true
     if exo_book.count == 0
       puts "Complete an exercice first before you can review ;)."
     else
-      print "What number do you want to review? "
-      number = gets.to_i
-      exo_book.review(number)
+      menu.exercices_book_menu
+      print "Please choose what to review: "
+      choice = gets.to_i
+      case choice
+      when ExercicesBook::REVIEW_BY_NUMBER
+        print "What number do you want to review? "
+        number = gets.to_i
+        exo_book.review(number)
+      when ExercicesBook::REVIEW_BY_SUBJECT
+        menu.subject_menu
+        print "Please choose a subject: "
+        subject = gets.to_i
+        exo_book.review_by_subject(subject)
+      end
     end
   else
     exo = Exercices.new(menu.choice, counter += 1)
