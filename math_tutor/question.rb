@@ -1,4 +1,4 @@
-# This class manage each question
+# This class manages each question
 # question, answer, grade
 # Jean F. Dorancy
 # 12/04/2015
@@ -14,11 +14,11 @@ class Question
     self.your_answers = {}
   end
   
-  def display
+  def print_question
     #We print the note one time and don't want to print it during the review
     puts "NOTE: Use two decimal places for Real Division\n\n" if self.operator == DIV && self.answer == nil
     puts (operand1 < 10? "    " : "   ") + operand1.to_s
-    puts operator_to_string(self.operator) + (operand2 < 10? "   " : "  ") + operand2.to_s
+    puts constant_to_operator(self.operator) + (operand2 < 10? "   " : "  ") + operand2.to_s
     puts "------"
     print "   " if your_answers[:first] == nil || your_answers[:second] == nil
   end
@@ -46,12 +46,12 @@ class Question
   def solve(operator)
     self.operator = operator
 
-    display
+    print_question
     correct_answer
     self.your_answers[:first] = gets.chomp
     if self.your_answers[:first].to_f != answer
       puts "\nSorry wrong answer! Try a second time.\n\n"
-      display
+      print_question
       self.your_answers[:second] = gets.chomp
       if self.your_answers[:second].to_f == answer
         puts "\nGood job this time!\n\n"
@@ -67,7 +67,7 @@ class Question
   end
   
   def review
-      self.display
+      print_question
       puts "Correct answer: #{answer}"
       print "Your answer"
       if answer == your_answers[:first]

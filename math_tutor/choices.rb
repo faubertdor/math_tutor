@@ -18,8 +18,8 @@ module Choices
   REVIEW = 12
   EXIT = 13
   
-  def operator_to_string(choice)
-    case choice
+  def constant_to_operator(operator)
+    case operator
     when ADD
       return "+"
     when SUB
@@ -34,6 +34,33 @@ module Choices
       return "Mod"
     else
       return "No operator found!"
+    end
+  end
+  
+  def constant_to_string(subject)
+    case subject
+    when ADD
+      return "Addition"
+    when SUB
+      return "Substraction"
+    when MUL
+      return "Multiplication"
+    when INT_DIV
+      return "Integer Division"
+    when DIV
+      return "Real Division"
+    when MOD
+      return "Modulo"
+    when A_S
+      return "Addition and Substraction"
+    when A_S_M
+      return "Addition, Substraction and Multiplication"
+    when A_S_M_I
+      return "Addition, Substraction, Multiplication and Integer Division"
+    when ALL
+      return "Addition, Substraction, Multiplication, Integer and Real Division"
+    else
+      return "Not found!"
     end
   end
   

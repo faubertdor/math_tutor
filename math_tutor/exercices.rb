@@ -1,17 +1,18 @@
-# This class manage the exercices 
+# This class manages single exercice with its questions
 # exercices, subjects, scores
 # Jean F. Dorancy
 # 12/04/2015
 
 class Exercices
     attr_reader :nb_of_questions
-    attr_accessor :subject, :nb_correct, :nb_incorrect, :partially_correct, :total_score, :all_questions
+    attr_accessor :subject, :number, :nb_correct, :nb_incorrect, :partially_correct, :total_score, :all_questions
     CREDIT = 100
-    
+    SCR_DELIMITER = "-----------------------------------\n\n"
     include Choices
     
-    def initialize(subject)
+    def initialize(subject, number)
       self.subject = subject
+      self.number = number
       self.nb_correct = 0
       self.nb_incorrect = 0
       self.partially_correct = 0
@@ -33,7 +34,7 @@ class Exercices
       end
     end
     
-    def add_questions(nb_of_questions)
+    def solve(nb_of_questions)
       counter = 0
           
       if subject == RANDOM
@@ -58,7 +59,7 @@ class Exercices
         end
         
         puts "\nQuestion # #{single_question.number = counter += 1}/#{nb_of_questions}"
-        puts "-----------------"
+        puts SCR_DELIMITER
         
         case single_question.solve(operator)
         when CREDIT
@@ -73,6 +74,7 @@ class Exercices
         all_questions << single_question
         clear_scr
       end
+        scores
     end
     
     def review(number)
@@ -87,7 +89,7 @@ class Exercices
     def review_all
         length = all_questions.length
         puts "Reviewing all #{length} question" + (length > 1? "s.": ".")
-        puts "-----------------------------------\n\n"
+        puts SCR_DELIMITER
         for question in all_questions do
             question.review
             puts "\n\n"
@@ -99,8 +101,7 @@ class Exercices
       percent *= 1000
       percent = percent.to_i / 10
       percent /= 100.0
-      puts "Score Report Card\n"\
-           "-----------------\n\n"
+      puts "Scores Report Card\n" + SCR_DELIMITER
       puts "Total number of question" + (nb_of_questions > 1? "s:":":") + " #{nb_of_questions}\n"\
            "Correct answer" + (nb_correct> 1? "s:":":") + " #{nb_correct}\n"\
            "Incorrect answer" + (nb_incorrect> 1? "s:":":") + " #{nb_incorrect}\n"\
@@ -109,4 +110,10 @@ class Exercices
            "Your percentage is: #{percent}%\n\n"
       clear_scr
     end
+    
+    def print_exercice
+        puts "\nExercice #{number}: " + constant_to_string(self.subject) + "\n\n"
+        review_all
+        scores
+    end  
 end

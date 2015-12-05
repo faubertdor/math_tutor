@@ -1,4 +1,4 @@
-# This class display and select menu choices
+# This class displays and select menu choices
 # menu, header
 # Jean F. Dorancy
 # 12/03/2015
@@ -26,7 +26,7 @@ class Menu
          " 9: Addition, Substraction, Multiplication and Int Division \n"\
          "10: All operators                                           \n"\
          "11: A random single operator                                \n"\
-         "12: Review all the questions                                \n"\
+         "12: Review exercices                                        \n"\
          "13: Exit the program                                        \n\n"\
   end
   
