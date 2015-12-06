@@ -15,6 +15,7 @@ class Menu
   end
   
   def print_choices
+    puts "\n------------------------Main Menu---------------------------\n"
     subject_menu
     puts " 7: Addition and Substraction                               \n"\
          " 8: Addition, Substraction and Multiplication               \n"\
@@ -52,14 +53,7 @@ class Menu
   
   def exercices_book_menu
     puts "\n 1: Review by subject\n"\
-         " 2: Review an exercice (If you remember the number)\n\n"\
-  end
-  
-  def review
-    REVIEW
-  end
-  
-  def exit
-    EXIT
+         " 2: Review an exercice (If you remember the number)\n"\
+         " 3: Go back to the Main Menu\n\n"
   end
 end

@@ -21,25 +21,29 @@ while true
   menu.choice = gets.to_i
   
   case menu.choice
-  when menu.exit
+  when Menu::EXIT
     exit
-  when menu.review
+  when Menu::REVIEW
     if exo_book.count == 0
       puts "Complete an exercice first before you can review ;)."
     else
+      exo_book.print_exercices
       menu.exercices_book_menu
       print "Please choose what to review: "
-      choice = gets.to_i
-      case choice
+      exo_book.review_choice = gets.to_i
+      case exo_book.review_choice
       when ExercicesBook::REVIEW_BY_NUMBER
         print "What number do you want to review? "
         number = gets.to_i
         exo_book.review(number)
       when ExercicesBook::REVIEW_BY_SUBJECT
         menu.subject_menu
-        print "Please choose a subject: "
+        print "\nPlease choose a subject: "
         subject = gets.to_i
         exo_book.review_by_subject(subject)
+      when ExercicesBook::GO_BACK
+        puts "\n\n"
+        menu.clear_scr
       end
     end
   else

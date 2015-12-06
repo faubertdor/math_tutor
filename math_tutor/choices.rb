@@ -4,6 +4,7 @@
 # 12/04/2015
 
 module Choices
+  GO_BACK = 0
   ADD = 1
   SUB = 2
   MUL = 3
@@ -59,6 +60,8 @@ module Choices
       return "Addition, Substraction, Multiplication and Integer Division"
     when ALL
       return "Addition, Substraction, Multiplication, Integer and Real Division"
+    when RANDOM
+      return "Euhhh... That was a single random operator!"
     else
       return "Not found!"
     end
@@ -79,4 +82,10 @@ module Choices
   def all_operators
     rand(ADD..DIV)
   end
+    
+  def clear_scr
+    print "Press ENTER to continue."
+    gets
+    system "clear"
+  end 
 end

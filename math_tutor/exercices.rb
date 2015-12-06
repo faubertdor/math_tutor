@@ -19,13 +19,7 @@ class Exercices
       self.total_score = 0
       self.all_questions = []
     end
-    
-    def clear_scr
-      print "Press ENTER to continue."
-      gets
-      system "clear"
-    end 
-    
+        
     def nb_of_questions=(val)
       @nb_of_questions = val
       while nb_of_questions < 0
@@ -75,6 +69,7 @@ class Exercices
         clear_scr
       end
         scores
+        clear_scr
     end
     
     def review(number)
@@ -94,6 +89,7 @@ class Exercices
             question.review
             puts "\n\n"
         end
+        clear_scr
     end
 
     def scores
@@ -108,12 +104,16 @@ class Exercices
            "Partially correct answer" + (partially_correct > 1? "s:":":") + " #{partially_correct}\n"\
            "Total score: #{total_score}\n"\
            "Your percentage is: #{percent}%\n\n"
-      clear_scr
     end
     
     def print_exercice
-        puts "\nExercice #{number}: " + constant_to_string(self.subject) + "\n\n"
+        print_summary
+        puts "\n\n"
         review_all
+    end
+    
+    def print_summary
+        puts "\nExercice #{number}: " + constant_to_string(self.subject) + "\n\n"
         scores
-    end  
+    end
 end
