@@ -22,14 +22,18 @@ while true
   
   case menu.choice
   when Menu::EXIT
-    exit
+    print "Are you sure you want to exit? "
+    exit_program = gets.chomp
+    if menu.yes_or_no(exit_program)
+      exit
+    end
   when Menu::REVIEW
     if exo_book.count == 0
-      puts "Complete an exercice first before you can review ;)."
+      puts "\nPlease complete an exercice before you can review ;)."
     else
       exo_book.print_exercices
       menu.exercices_book_menu
-      print "Please choose what to review: "
+      print "Please enter your choice: "
       exo_book.review_choice = gets.to_i
       case exo_book.review_choice
       when ExercicesBook::REVIEW_BY_NUMBER
@@ -41,6 +45,10 @@ while true
         print "\nPlease choose a subject: "
         subject = gets.to_i
         exo_book.review_by_subject(subject)
+      when ExercicesBook::DELETE
+        print "\nWhat number do you want to delete? "
+        nb_to_del = gets.to_i
+        exo_book.delete(nb_to_del)
       when ExercicesBook::GO_BACK
         puts "\n\n"
         menu.clear_scr

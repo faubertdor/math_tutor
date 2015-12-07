@@ -87,5 +87,23 @@ module Choices
     print "Press ENTER to continue."
     gets
     system "clear"
-  end 
+  end
+  
+  def yes_or_no(choice)
+    y = 'y'
+    yes = 'yes'
+    n = 'n'
+    no = 'no'
+    while (choice != y && choice != y.upcase && choice != yes && choice != yes.upcase &&
+           choice != n && choice != n.upcase && choice != no && choice != no.upcase)
+        print "Please enter a valid choice (y/n): "
+        choice = gets.chomp
+    end
+    case choice
+    when y, y.upcase, yes, yes.upcase
+      return true
+    when n, n.upcase, no, no.upcase
+      return false
+    end
+  end
 end

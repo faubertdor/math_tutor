@@ -54,6 +54,7 @@ class Menu
   def exercices_book_menu
     puts "\n 1: Review by subject\n"\
          " 2: Review an exercice (If you remember the number)\n"\
-         " 3: Go back to the Main Menu\n\n"
+         " 3: Delete an exercice\n"\
+         " 4: Go back to the Main Menu\n\n"
   end
 end
