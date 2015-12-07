@@ -29,8 +29,12 @@ class ExercicesBook
     exercices.length
   end
   
+  def exercice_by_number(number)
+    exercices.find {|x| x.number == number}
+  end
+  
   def is_number_valid?(number)
-    is_valid = exercices.find {|x| x.number == number}
+    is_valid = exercice_by_number(number)
     if is_valid
       return true
     else
@@ -41,10 +45,10 @@ class ExercicesBook
   def review(number)
     if count != 0
      while !is_number_valid?(number)
-      puts "Please enter a valid exercice number:"
+      print "Please enter a valid exercice number:"
       number = gets.to_i
      end
-      exercices[number - 1].print_exercice
+      exercice_by_number(number).print_exercice
       return exercices[number - 1]
     else
       puts "\n\nThere are no completed exercices yet. \n"
