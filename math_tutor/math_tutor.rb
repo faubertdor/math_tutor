@@ -31,28 +31,31 @@ while true
     if exo_book.count == 0
       puts "\nPlease complete an exercice before you can review ;)."
     else
-      exo_book.print_exercices
-      menu.exercices_book_menu
-      print "Please enter your choice: "
-      exo_book.review_choice = gets.to_i
-      case exo_book.review_choice
-      when ExercicesBook::REVIEW_BY_NUMBER
-        print "What number do you want to review? "
-        number = gets.to_i
+      begin
+       menu.exercices_book_menu
+       print "Please enter your choice: "
+       exo_book.review_choice = gets.to_i
+       case exo_book.review_choice
+       when ExercicesBook::SUMMARY
+         exo_book.print_exercices
+       when ExercicesBook::REVIEW_BY_NUMBER
+         print "What number do you want to review? "
+         number = gets.to_i
         exo_book.review(number)
-      when ExercicesBook::REVIEW_BY_SUBJECT
-        menu.subject_menu
-        print "\nPlease choose a subject: "
-        subject = gets.to_i
-        exo_book.review_by_subject(subject)
-      when ExercicesBook::DELETE
-        print "\nWhat number do you want to delete? "
-        nb_to_del = gets.to_i
-        exo_book.delete(nb_to_del)
-      when ExercicesBook::GO_BACK
-        puts "\n\n"
-        menu.clear_scr
-      end
+       when ExercicesBook::REVIEW_BY_SUBJECT
+         menu.subject_menu
+         print "\nPlease choose a subject: "
+         subject = gets.to_i
+         exo_book.review_by_subject(subject)
+       when ExercicesBook::DELETE
+         print "\nWhat number do you want to delete? "
+         nb_to_del = gets.to_i
+         exo_book.delete(nb_to_del)
+       when ExercicesBook::GO_BACK
+         puts "\n\n"
+         menu.clear_scr
+       end
+      end while exo_book.review_choice != ExercicesBook::GO_BACK
     end
   else
     exo = Exercices.new(menu.choice, counter += 1)

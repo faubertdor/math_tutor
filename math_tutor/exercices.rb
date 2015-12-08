@@ -113,7 +113,7 @@ class Exercices
     end
     
     def print_summary
-        puts "\nExercice #{number}: " + constant_to_string(self.subject) + "\n\n"
+        puts "Exercice #{number}: " + constant_to_string(self.subject) + "\n\n"
         scores
     end
 end

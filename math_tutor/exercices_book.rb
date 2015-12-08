@@ -9,7 +9,8 @@ class ExercicesBook
   REVIEW_BY_SUBJECT = 1
   REVIEW_BY_NUMBER = 2
   DELETE = 3
-  GO_BACK = 4 # I keep exit option as the last in the menu
+  SUMMARY = 4
+  GO_BACK = 5 # I keep exit option as the last in the menu
   
   include Choices
   
@@ -45,7 +46,7 @@ class ExercicesBook
   def review(number)
     if count != 0
      while !is_number_valid?(number)
-      print "Please enter a valid exercice number:"
+      print "Please enter a valid exercice number: "
       number = gets.to_i
      end
       exercice_by_number(number).print_exercice

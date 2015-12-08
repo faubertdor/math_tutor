@@ -57,9 +57,9 @@ module Choices
     when A_S_M
       return "Addition, Substraction and Multiplication"
     when A_S_M_I
-      return "Addition, Substraction, Multiplication and Integer Division"
+      return "Addition, Substraction,\nMultiplication and Integer Division"
     when ALL
-      return "Addition, Substraction, Multiplication, Integer and Real Division"
+      return "Addition, Substraction,\nMultiplication, Integer and Real Division"
     when RANDOM
       return "Euhhh... That was a single random operator!"
     else
