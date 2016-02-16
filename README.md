@@ -1,2 +1,3 @@
-# ruby_basics
-This contains simple exercices about the basics for beginers in Ruby.
+Math Tutor
+==
+This is a simple Ruby program that admisters arithmetic problems up to two digits.
